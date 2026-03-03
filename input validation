@@ -1,0 +1,25 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $fullname = trim($_POST['fullname']);
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
+
+    // Check empty
+    if (empty($fullname) || empty($email) || empty($password)) {
+        die("All fields are required.");
+    }
+
+    // Validate email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        die("Invalid email format.");
+    }
+
+    // Password length check
+    if (strlen($password) < 8) {
+        die("Password must be at least 8 characters.");
+    }
+
+    echo "Validation passed!";
+}
+?>
